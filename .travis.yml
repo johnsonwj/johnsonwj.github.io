@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- stable
+
+script: bash ./deploy/deploy.sh
+env:
+  global:
+  - ENCRYPTION_LABEL: a2233ce3ddfb
+  - COMMIT_AUTHOR_EMAIL: "johns.willj@gmail.com"
