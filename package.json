@@ -1,0 +1,33 @@
+{
+  "name": "johnsonwj-github-pages",
+  "version": "1.0.0",
+  "description": "WillJ's Github Pages",
+  "main": "components/Main.jsx",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnsonwj/johnsonwj.github.io.git"
+  },
+  "author": "Will J",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/johnsonwj/johnsonwj.github.io/issues"
+  },
+  "homepage": "https://github.com/johnsonwj/johnsonwj.github.io#readme",
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "node-sass": "^4.5.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-router": "^3.0.2",
+    "redux": "^3.6.0"
+  }
+}
