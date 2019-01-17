@@ -31,7 +31,7 @@ jobs:
             - ".stack-work"
       - deploy:
           name: Deploy site to GitHub Pages
-          command: |
+          command: | 
             git config --global user.email circleci@circleci
             git config --global user.name CircleCI
             cd _site/
