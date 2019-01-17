@@ -1,0 +1,58 @@
+# Borrowed significantly from:
+#   - https://circleci.com/docs/2.0/language-haskell/
+#   - https://www.stackbuilders.com/news/dr-hakyll-create-a-github-page-with-hakyll-and-circleci
+
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: fpco/stack-build:lts
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Cached Dependencies
+          keys:
+            - hakyll-build-v1-{{ checksum "package.yaml" }}
+      - run:
+          name: Resolve/Update Dependencies
+          command: stack setup
+      - run:
+          name: Build site
+          command: |
+            stack build
+            stack run build
+      - run:
+          name: Build site
+          command: stack run build
+      - save_cache:
+          name: Cache Dependencies
+          key: hakyll-build-v1-{{ checksum "package.yaml" }}
+          paths:
+            - ".stack-work"
+      - deploy:
+          name: Deploy site to GitHub Pages
+          command: |
+            git config --global user.email circleci@circleci
+            git config --global user.name CircleCI
+            cd _site/
+            git status
+            git add --all
+            git commit -m "Update (`date -u '+%Y-%m-%dT%H:%M:%SZ'`) [ci skip]"
+            git push origin master
+            cd ..
+            git status
+            git add _site/
+            git commit -m "Update _site (`date -u '+%Y-%m-%dT%H:%M:%SZ'`) [ci skip]"
+            git push origin hakyll
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - hakyll
+
