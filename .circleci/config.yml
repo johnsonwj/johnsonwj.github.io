@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
-            - hakyll-build-v1-{{ checksum "package.yaml" }}
+            - hakyll-build-v1-{{ checksum "johnsonwj-github-io.cabal" }}
       - run:
           name: Resolve/Update Dependencies
           command: stack setup
@@ -25,7 +25,7 @@ jobs:
           command: stack run build
       - save_cache:
           name: Cache Dependencies
-          key: hakyll-build-v1-{{ checksum "package.yaml" }}
+          key: hakyll-build-v1-{{ checksum "johnsonwj-github-io.cabal" }}
           paths:
             - ".stack-work"
       - deploy:
