@@ -18,11 +18,16 @@ jobs:
           command: stack setup
       - run:
           name: Build project
-          command: |
-            stack build -j1
+          command: stack build -j1
       - run:
           name: Build site
-          command: stack run build
+          command: |
+            git submodule init
+            git submodule update
+            cd _site/
+            git checkout master
+            cd ..
+            stack run build
       - save_cache:
           name: Cache Dependencies
           key: hakyll-build-v1-{{ checksum "johnsonwj-github-io.cabal" }}
