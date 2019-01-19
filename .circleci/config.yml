@@ -17,10 +17,9 @@ jobs:
           name: Resolve/Update Dependencies
           command: stack setup
       - run:
-          name: Build site
+          name: Build project
           command: |
-            stack build
-            stack run build
+            stack build -j1
       - run:
           name: Build site
           command: stack run build
