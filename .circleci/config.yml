@@ -14,10 +14,11 @@ jobs:
           keys:
             - hakyll-build-v1-{{ checksum "johnsonwj-github-io.cabal" }}
       - run:
+          name: Set Stack Root Directory
+          command: echo 'export STACK_ROOT="${HOME}/project/.stack-root"' >> $BASH_ENV
+      - run:
           name: Resolve/Update Dependencies
-          command: |
-            echo 'export STACK_ROOT="${CIRCLE_WORKING_DIRECTORY}/.stack-root"' >> $BASH_ENV
-            stack setup
+          command: stack setup
       - run:
           name: Build project
           command: stack build -j1
