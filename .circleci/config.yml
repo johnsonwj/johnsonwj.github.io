@@ -15,7 +15,9 @@ jobs:
             - hakyll-build-v1-{{ checksum "johnsonwj-github-io.cabal" }}
       - run:
           name: Resolve/Update Dependencies
-          command: stack setup
+          command: |
+            echo 'export STACK_ROOT="${CIRCLE_WORKING_DIRECTORY}/.stack-root"' >> $BASH_ENV
+            stack setup
       - run:
           name: Build project
           command: stack build -j1
@@ -33,6 +35,7 @@ jobs:
           key: hakyll-build-v1-{{ checksum "johnsonwj-github-io.cabal" }}
           paths:
             - ".stack-work"
+            - ".stack-root"
       - deploy:
           name: Deploy site to GitHub Pages
           command: | 
