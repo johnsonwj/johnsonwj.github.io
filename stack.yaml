@@ -1,4 +1,8 @@
 
-resolver: nightly-2019-01-16
+resolver: lts-13.4
 packages:
   - .
+extra-deps:
+  - hakyll-4.12.5.0
+  - hakyll-sass-0.2.4
+  - lrucache-1.2.0.1
