@@ -15,7 +15,7 @@ jobs:
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
-            - hakyll-build-stack-cache-v1
+            - hakyll-build-stack-cache-
       - run:
           name: Set Stack Root Directory
           command: echo 'export STACK_ROOT="${HOME}/project/.stack-root"' >> $BASH_ENV
@@ -36,7 +36,7 @@ jobs:
             stack run build
       - save_cache:
           name: Cache Dependencies
-          key: hakyll-build-stack-cache-v1
+          key: hakyll-build-stack-cache-v2
           paths:
             - ".stack-work"
             - ".stack-root"
