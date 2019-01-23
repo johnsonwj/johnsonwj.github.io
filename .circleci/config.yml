@@ -8,6 +8,9 @@ jobs:
     docker:
       - image: fpco/stack-build:lts
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "b8:42:f3:b5:9e:2a:94:09:c6:75:dd:4f:2d:73:da:97"
       - checkout
       - restore_cache:
           name: Restore Cached Dependencies
@@ -38,20 +41,25 @@ jobs:
             - ".stack-work"
             - ".stack-root"
       - deploy:
+          # https://stackoverflow.com/questions/5143795/how-can-i-check-in-a-bash-script-if-my-local-git-repository-has-changes
           name: Deploy site to GitHub Pages
-          command: | 
-            git config --global user.email circleci@circleci
-            git config --global user.name CircleCI
-            cd _site/
-            git status
-            git add --all
-            git commit -m "Update (`date -u '+%Y-%m-%dT%H:%M:%SZ'`) [ci skip]"
-            git push origin master
-            cd ..
-            git status
-            git add _site/
-            git commit -m "Update _site (`date -u '+%Y-%m-%dT%H:%M:%SZ'`) [ci skip]"
-            git push origin hakyll
+          command: |
+            if git diff-index --quiet HEAD --; then
+                echo "no changes; will not deploy"
+            else
+              git config --global user.email circleci@circleci
+              git config --global user.name CircleCI
+              cd _site/
+              git status
+              git add --all
+              git commit -m "Update (`date -u '+%Y-%m-%dT%H:%M:%SZ'`) [ci skip]"
+              git push origin master
+              cd ..
+              git status
+              git add _site/
+              git commit -m "Update _site (`date -u '+%Y-%m-%dT%H:%M:%SZ'`) [ci skip]"
+              git push origin hakyll
+            fi
 
 
 workflows:
