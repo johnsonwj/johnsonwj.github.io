@@ -1,4 +1,4 @@
-.vscode/*
-.stack-work/*
-_cache/*
-
+.vscode
+.stack-*
+_cache
+deployed
