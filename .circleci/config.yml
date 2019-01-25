@@ -12,7 +12,6 @@ jobs:
           fingerprints:
             - "b8:42:f3:b5:9e:2a:94:09:c6:75:dd:4f:2d:73:da:97"
       - checkout
-      - run: apt update && apt install g++-7 -y
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
