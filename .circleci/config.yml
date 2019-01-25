@@ -30,7 +30,7 @@ jobs:
           command: stack run rebuild
       - save_cache:
           name: Cache Dependencies
-          key: hakyll-build-stack-cache-v3-{{ checksum johnsonwj-github-io.cabal }}
+          key: hakyll-build-stack-cache-v3-{{ checksum "johnsonwj-github-io.cabal" }}
           paths:
             - ".stack-work"
             - ".stack-root"
